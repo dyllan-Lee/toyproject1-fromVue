@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h2>끝말잇기</h2>
+    <p id="la">{{laWorld}}</p>
+    <input type="text" id="Fa" v-model='laWorld2'>
+    <h2>{{laWorld2}}</h2>
+    <button @click="compareC">확인</button>
+    <h2>{{result}}</h2>
+    <h1>구구단 연습하기</h1>
+    <h2>{{num1}}X{{num2}} = </h2>
+    <input type="number" v-model="numRe">
+    <button v-on:click="nREsult">정답확인</button>
+    <h2>{{gugure}}</h2>
+
+  </div>
+</body>
+<script>
+  const {
+    createApp
+  } = Vue
+  createApp({
+    data() {
+      return {
+        laWorld: '카메라',
+        laWorld2: '',
+        result: '',
+        num1: Math.round(Math.random() * 9),
+        num2: Math.round(Math.random() * 9),
+        gugure: '',
+        numRe: '',
+      }
+    },
+    methods: {
+      compareC() {
+        if (this.laWorld[this.laWorld.length - 1] == this.laWorld2[0]) {
+          this.result = '정답입니다.';
+          this.laWorld = this.laWorld2;
+        } else {
+          return this.result = '오답입니다.'
+        }
+      },
+      nREsult() {
+        if (parseInt(this.numRe) === this.num1 * this.num2) {
+          this.gugure = '정답입니다.';
+          this.num1 = Math.round(Math.random() * 9);
+          this.num2 = Math.round(Math.random() * 9);
+          this.numRe = ''
+        } else {
+          this.gugure = '오답입니다.'
+          this.numRe = ''
+        }
+      }
+    },
+    computed: { //즉시 실행 함수
+      upper() {
+        return this.title.toUpperCase();
+      },
+      Reflect() {
+        return this.world.split('').reverse().join('');
+      },
+      fnCount() {
+        return 5 * this.nClick
+      }
+    }
+
+
+
+  }).mount("#app")
+</script>
+
+</html>
